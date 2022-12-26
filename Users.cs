@@ -139,7 +139,7 @@ namespace allUsers
             role = 0;
         }
 
-        private static void keysProcessing()
+        private static void keysProcessing(string lname)
         {
             int coord = (int)consts.m_min_c;
             //int max;
@@ -505,12 +505,12 @@ namespace allUsers
                             }
                             allUsers.Remove(allUsers[coord - (int)consts.m_min_c]);
                             max--;
-                            ConsoleUi.drawUsersWin1();
+                            ConsoleUi.drawUsersWin1(lname);
                             break;
                         }
                         else if ((int)i_key.Key == (int)keys.key_Esc)
                         {
-                            ConsoleUi.drawUsersWin1();
+                            ConsoleUi.drawUsersWin1(lname);
                             break;
                         }
 
@@ -725,7 +725,7 @@ namespace allUsers
 
                                     Operations.Create(new Cashier(Convert.ToInt32(data[0]), data[1], data[2]), "db_cashier.json");
                                 }
-                                ConsoleUi.drawUsersWin1();
+                                ConsoleUi.drawUsersWin1(lname);
                                 break;
                             }
                         }
@@ -781,7 +781,7 @@ namespace allUsers
                         }
                         else if ((int)k.Key == (int)keys.key_Esc)
                         {
-                            ConsoleUi.drawUsersWin1();
+                            ConsoleUi.drawUsersWin1(lname);
                             break;
                         }
                     }
@@ -794,10 +794,10 @@ namespace allUsers
                 }
             }
         }
-        public static void initAdminFuncs()
+        public static void initAdminFuncs(string name)
         {
-            ConsoleUi.drawUsersWin1();
-            keysProcessing();
+            ConsoleUi.drawUsersWin1(name);
+            keysProcessing(name);
         }
     }
     public class HRmanager
@@ -813,11 +813,9 @@ namespace allUsers
             passwd = _passwd;
             role = 1;
         }
-        public static void initHrFuncs()
+        public static void initHrFuncs(string name)
         {
-            Console.Clear();
-            Console.WriteLine("Функционал кадровика");
-
+            ConsoleUi.drawHrMainWin(name);
         }
 
     }
@@ -886,9 +884,9 @@ namespace allUsers
     {
         public int id, paspdata, salary, specid;
         public string name, lastname, patronymic, spec;
-        public DateTime birthdate;
+        public string birthdate;
 
-        public Worker(int _id, int _paspdata, int _salary, int _specid, string _name, string _lastname, string _patronymic, string _spec, DateTime _birthdate)
+        public Worker(int _id, int _paspdata, int _salary, int _specid, string _name, string _lastname, string _patronymic, string _spec, string _birthdate)
         {
             id = _id;
             paspdata = _paspdata;
