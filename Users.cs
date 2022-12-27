@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
-using System.Xml.Serialization;
-using System;
+//using System.Xml.Serialization;
+//using System;
 using System.Reflection;
-using System.ComponentModel.Design;
+//using System.ComponentModel.Design;
 using ConsoleuiNames;
 using MainProgram;
 
@@ -251,7 +251,7 @@ namespace allUsers
                             string login = (string)allUsers[coord - (int)consts.m_min_c][1];
                             string passwd = (string)allUsers[coord - (int)consts.m_min_c][2];
                             Console.SetCursorPosition(i_coord, intrcoord);
-                            Console.WriteLine("\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
+                            Console.WriteLine("                            ");
                             List<string> val = new List<string>();
                             while (true)
                             {
@@ -551,6 +551,11 @@ namespace allUsers
                                 i_coord += (int)consts.step;
                             }
                         }
+                        else if ((int)k.Key == (int)keys.key_Esc)
+                        {
+                            ConsoleUi.drawUsersWin1(lname);
+                            break;
+                        }
                         else if ((int)k.Key == (int)keys.key_Ent)
                         {
                             int intrcoord = 0;
@@ -696,37 +701,73 @@ namespace allUsers
                             }
                             else if (i_coord == 4)
                             {
-                                max += 1;
-                                List<object> user = new List<object>();
-                                user.Add(Convert.ToInt32(data[0]));
-                                user.Add(data[1]);
-                                user.Add(data[2]);
-                                user.Add(Convert.ToInt32(data[3]));
-                                allUsers.Add(user);
-                                if (Convert.ToInt32(data[3]) == (int)roles.adm)
+                                try
                                 {
-                                    Operations.Create(new Admin(Convert.ToInt32(data[0]), data[1], data[2]), "db_admin.json");
-                                }
-                                else if (Convert.ToInt32(data[3]) == (int)roles.hrm)
-                                {
+                                    max += 1;
+                                    List<object> user = new List<object>();
+                                    user.Add(Convert.ToInt32(data[0]));
+                                    user.Add(data[1]);
+                                    user.Add(data[2]);
+                                    user.Add(Convert.ToInt32(data[3]));
+                                    allUsers.Add(user);
 
-                                    Operations.Create(new HRmanager(Convert.ToInt32(data[0]), data[1], data[2]), "db_hr.json");
-                                }
-                                else if (Convert.ToInt32(data[3]) == (int)roles.accnt)
-                                {
-                                    Operations.Create(new Accountant(Convert.ToInt32(data[0]), data[1], data[2]), "db_account.json");
-                                }
-                                else if (Convert.ToInt32(data[3]) == (int)roles.cm)
-                                {
-                                    Operations.Create(new CargoManager(Convert.ToInt32(data[0]), data[1], data[2]), "db_cargo.json");
-                                }
-                                else if (Convert.ToInt32(data[3]) == (int)roles.csh)
-                                {
+                                    if (Convert.ToInt32(data[3]) == (int)roles.adm)
+                                    {
+                                        Operations.Create(new Admin(Convert.ToInt32(data[0]), data[1], data[2]), "db_admin.json");
+                                    }
+                                    else if (Convert.ToInt32(data[3]) == (int)roles.hrm)
+                                    {
 
-                                    Operations.Create(new Cashier(Convert.ToInt32(data[0]), data[1], data[2]), "db_cashier.json");
+                                        Operations.Create(new HRmanager(Convert.ToInt32(data[0]), data[1], data[2]), "db_hr.json");
+                                        ConsoleUi.drawUsersWin1(lname);
+                                        break;
+                                    }
+                                    else if (Convert.ToInt32(data[3]) == (int)roles.accnt)
+                                    {
+                                        Operations.Create(new Accountant(Convert.ToInt32(data[0]), data[1], data[2]), "db_account.json");
+                                        ConsoleUi.drawUsersWin1(lname);
+                                        break;
+                                    }
+                                    else if (Convert.ToInt32(data[3]) == (int)roles.cm)
+                                    {
+                                        Operations.Create(new CargoManager(Convert.ToInt32(data[0]), data[1], data[2]), "db_cargo.json");
+                                        ConsoleUi.drawUsersWin1(lname);
+                                        break;
+                                    }
+                                    else if (Convert.ToInt32(data[3]) == (int)roles.csh)
+                                    {
+
+                                        Operations.Create(new Cashier(Convert.ToInt32(data[0]), data[1], data[2]), "db_cashier.json");
+                                        ConsoleUi.drawUsersWin1(lname);
+                                        break;
+                                    }
+                                    else
+                                    {
+
+                                        Console.SetCursorPosition(7, 3);
+                                        Console.WriteLine("                                                             ");
+                                        data.Remove(data[3]);
+                                        Console.SetCursorPosition(0, 10);
+                                        Console.WriteLine("                                                       ");
+                                        Console.SetCursorPosition(0, 10);
+                                        Console.WriteLine("Роли не существует");
+                                    }
                                 }
-                                ConsoleUi.drawUsersWin1(lname);
-                                break;
+                                catch (System.FormatException)
+                                {
+                                    Console.SetCursorPosition(6, 0);
+                                    Console.WriteLine("                                       ");
+                                    Console.SetCursorPosition(8, 1);
+                                    Console.WriteLine("                                       ");
+                                    Console.SetCursorPosition(9, 2);
+                                    Console.WriteLine("                                       ");
+                                    Console.SetCursorPosition(7, 3);
+                                    Console.WriteLine("                                       ");
+                                    Console.SetCursorPosition(0, 10);
+                                    Console.WriteLine("Нельзя задать строковое значение для числовых полей (id, роль)");
+                                    data.Clear();
+
+                                }
                             }
                         }
                     }

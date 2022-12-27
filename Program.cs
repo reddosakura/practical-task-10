@@ -153,11 +153,16 @@ namespace MainProgram
                                 //string passwd = Auth.CheckLogin<Admin>(output[0], "db_admin.json");
                                 if (Auth.CheckPassword<Admin>(output[1], "db_admin.json"))
                                 {
-                                    Admin.initAdminFuncs();
+                                    Admin.initAdminFuncs(output[0]);
                                     break;
                                 }
                                 else
                                 {
+                                    output.Clear();
+                                    Console.SetCursorPosition(8, 0);
+                                    Console.WriteLine("                                    ");
+                                    Console.SetCursorPosition(9, 1);
+                                    Console.WriteLine("                                    ");
                                     Console.SetCursorPosition(0, max + 1);
                                     Console.WriteLine("Неверный пароль");
                                 }
@@ -167,11 +172,17 @@ namespace MainProgram
                             {
                                 if (Auth.CheckPassword<HRmanager>(output[1], "db_hr.json"))
                                 {
-                                    HRmanager.initHrFuncs();
+                                    HRmanager.initHrFuncs(output[0]);
                                     break;
                                 }
                                 else
                                 {
+
+                                    output.Clear();
+                                    Console.SetCursorPosition(8, 0);
+                                    Console.WriteLine("                                    ");
+                                    Console.SetCursorPosition(9, 1);
+                                    Console.WriteLine("                                    ");
                                     Console.SetCursorPosition(0, max + 1);
                                     Console.WriteLine("Неверный пароль");
 
@@ -186,6 +197,11 @@ namespace MainProgram
                                 }
                                 else
                                 {
+                                    output.Clear();
+                                    Console.SetCursorPosition(8, 0);
+                                    Console.WriteLine("                                    ");
+                                    Console.SetCursorPosition(9, 1);
+                                    Console.WriteLine("                                    ");
                                     Console.SetCursorPosition(0, max + 1);
                                     Console.WriteLine("Неверный пароль");
 
@@ -200,6 +216,11 @@ namespace MainProgram
                                 }
                                 else
                                 {
+                                    output.Clear();
+                                    Console.SetCursorPosition(8, 0);
+                                    Console.WriteLine("                                    ");
+                                    Console.SetCursorPosition(9, 1);
+                                    Console.WriteLine("                                    ");
                                     Console.SetCursorPosition(0, max + 1);
                                     Console.WriteLine("Неверный пароль");
                                 }
@@ -214,6 +235,11 @@ namespace MainProgram
                                 }
                                 else
                                 {
+                                    output.Clear();
+                                    Console.SetCursorPosition(8, 0);
+                                    Console.WriteLine("                                    ");
+                                    Console.SetCursorPosition(9, 1);
+                                    Console.WriteLine("                                    ");
                                     Console.SetCursorPosition(0, max + 1);
                                     Console.WriteLine("Неверный пароль");
                                 }
@@ -221,6 +247,10 @@ namespace MainProgram
                             else
                             {
                                 output.Clear();
+                                Console.SetCursorPosition(8, 0);
+                                Console.WriteLine("                                    ");
+                                Console.SetCursorPosition(9, 1);
+                                Console.WriteLine("                                    ");
                                 Console.SetCursorPosition(0, max + 1);
                                 Console.WriteLine("Пользователя не существует");
 
@@ -238,7 +268,8 @@ namespace MainProgram
         {
             ConsoleUi.drawAuthWin();
             AuthL();
-
+            //Operations.Create(new Worker(1, 1234567890, 45000, 0, "k", "k", "l", "4", "21.01.2000"), "db_specs.json");
+            //Operations.Delete<Worker>("db_specs.json", 1);
         }
         private static void Main()
         {

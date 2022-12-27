@@ -65,6 +65,22 @@ namespace ConsoleuiNames
             Console.WriteLine("Поиск по:");
             Console.WriteLine("( )ID\n( )Логин\n( )Пароль\n( )Роль");
         }
+        public static void drawHrMainWin(string name = "Кадровик")
+        {
+            Console.Clear();
+            Console.WriteLine($"Здравствуйте, {name}");
+            Console.SetCursorPosition(50, 0);
+            Console.WriteLine("Роль: Менеджер персонала");
+            Console.SetCursorPosition(50, 1);
+            Console.Write("F1 - Создать запись | F2 - поиск");
+            Console.SetCursorPosition(0, 1);
+            Console.WriteLine("  ");
+            foreach (var z in Operations.Read<Worker>("db_specs.json"))
+            {
+                Console.WriteLine("( )" + string.Join("\t\t", z));
+            }
+
+        }
         public static void drawCargoWin()
         {
             Console.Clear();
